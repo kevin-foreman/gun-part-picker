@@ -11,6 +11,10 @@ const PewPartSelector = ({ onPartSelected }) => {
     }
 
     // Need event handler for sub types
+    const handleSubPartChange = (event) => {
+        setSelectedSubPart(event.target.value);
+        onPartSelected(selectedPart, event.target.value); // Notifying the parent component of the state change
+    }
 
     // Need event handler for submission when making a selection
     // const handleSubmit
@@ -36,8 +40,27 @@ const PewPartSelector = ({ onPartSelected }) => {
                 <select id='part' value={selectedPart} onChange={handlePartChange}>
 
                     <option value=''>Select A Part</option>
+                    {Object.keys(parts).map((part) => (
+                        <option key={part} value={part}>
+                            {part}
+                        </option>
+                    ))}
 
                 </select>
+
+                {selectedPart && (
+                    <>
+
+                        <label htmlFor='subPart'> Sub-Part: </label>
+                        <select id='subPart' value={selectedSubPart} onChange={handleSubPartChange}>
+
+                            <option value=''>Select a sub-part</option>
+
+                        </select>
+
+                    </>
+                )}
+
             </div>
         </div>
     )
