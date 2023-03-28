@@ -55,6 +55,11 @@ const PewPartSelector = ({ onPartSelected }) => {
                         <select id='subPart' value={selectedSubPart} onChange={handleSubPartChange}>
 
                             <option value=''>Select a sub-part</option>
+                            {parts[selectedPart].map((subPart) => (
+                                <option key={subPart} value={subPart}>
+                                    {subPart}
+                                </option>
+                            ))}
 
                         </select>
 
@@ -63,7 +68,7 @@ const PewPartSelector = ({ onPartSelected }) => {
 
             </div>
         </div>
-    )
+    );
 }
 
 export default PewPartSelector;
