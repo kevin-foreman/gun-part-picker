@@ -1,10 +1,14 @@
 import { useState } from 'react'
 import './App.css'
-import PewPart from '.'
+import PewPartSelector from '/src/components/pew-part/PewPart'
 
 function App() {
 
-  const handleChangePart = ()
+  const handlePartSelected = (part, subPart) => {
+    console.log('Selected part:', part);
+    console.log('Selected sub-part:', subPart);
+    // Store the selected part and sub-part, or make an API call here
+  }
 
   return (
     <div className="App">
@@ -13,8 +17,7 @@ function App() {
       </div>
 
       <h1>Build a Pew</h1>
-
-
+      <PewPartSelector onPartSelected={handlePartSelected} />
       
       </div>
       
