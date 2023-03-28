@@ -16,7 +16,6 @@ function App() {
 
       </div>
 
-      <h1>Build a Pew</h1>
       <PewPartSelector onPartSelected={handlePartSelected} />
       
       </div>

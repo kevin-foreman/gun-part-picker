@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 
 const PewPartSelector = ({ onPartSelected }) => {
-    const [selectedPart, setSelctedPart] = useState('');
+    const [selectedPart, setSelectedPart] = useState('');
     const [selectedSubPart, setSelectedSubPart] = useState('');
 
     // Need event handler to handle when a part changes
-    // const handleChangePart = (event) => {
-    //     setPartType(event.target.value);
-    //     setPartSubType('');
-    // }
+    const handlePartChange = (event) => {
+        setSelectedPart(event.target.value);
+        setSelectedSubPart('');
+    }
 
     // Need event handler for sub types
 
@@ -29,8 +29,16 @@ const PewPartSelector = ({ onPartSelected }) => {
     };
 
     return (
-        <div>
-            Hello parts!
+        <div className='body'>
+            <h1>Build a Pew</h1>
+            <div>
+                <label htmlFor='part'>Part: </label>
+                <select id='part' value={selectedPart} onChange={handlePartChange}>
+
+                    <option value=''>Select A Part</option>
+
+                </select>
+            </div>
         </div>
     )
 }
