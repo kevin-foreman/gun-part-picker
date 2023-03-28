@@ -4,6 +4,7 @@ const PewPartSelector = ({ onPartSelected }) => {
     const [selectedPart, setSelectedPart] = useState('');
     const [selectedSubPart, setSelectedSubPart] = useState('');
     const [submitSelection, setSubmitSelection] = useState(false);
+    // Add a new state variable to handle each part, as it is selected
 
     // Event handler to handle when a part changes
     const handlePartChange = (event) => {
