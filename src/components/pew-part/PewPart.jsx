@@ -19,13 +19,13 @@ const PewPartSelector = ({ onPartSelected }) => {
     const parts = {
         'Upper-Recievers': ['Aero Precision', 'Grey Ghost Precision', 'Radical Firearms', 'Willow Defense', 'Daniel Defense', 'Foxtrot Mike'],
         'Lower-Recievers': ['Aero Precision', 'Grey Ghost Precision', 'Radical Firearms', 'Willow Defense', 'Daniel Defense', 'Foxtrot Mike'],
-        'Barrels': ['XXX', 'YYY', 'ZZZ'],
-        'Triggers': ['XXX', 'YYY', 'ZZZ'],
-        'Stocks': ['XXX', 'YYY', 'ZZZ'],
-        'Charging-Handles': ['XXX', 'YYY', 'ZZZ'],
-        'Optics': ['XXX', 'YYY', 'ZZZ'],
-        'Bolt-Carrier-Groups': ['XXX', 'YYY', 'ZZZ'],
-        'Pistol-Grips': ['XXX', 'YYY', 'ZZZ']
+        'Barrels': ['Ballistic Advantage', 'Faxon Firearms', 'WMD Guns', 'Wylde'],
+        'Triggers': ['Timney', 'CMC', 'Geissele', 'Hiperfire', 'Wilson Combat'],
+        'Stocks': ['BCM', 'Magpul', 'Battle Arms', 'Mission First', 'MOE'],
+        'Charging-Handles': ['Radian', 'Aero Precision', 'BCM'],
+        'Optics': ['Vortex', 'Sig Sauer', 'Swampfox', 'Trijicon'],
+        'Bolt-Carrier-Groups': ['Sons of Liberty', 'Aero Precision', 'Alpha Shooting', 'Jacob Grey', 'TRYBE'],
+        'Pistol-Grips': ['BCM', 'Tyrant', 'Magpul', 'Tactical Deluxe', 'Stark One']
     };
 
     return (
