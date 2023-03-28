@@ -17,7 +17,15 @@ const PewPartSelector = (props) => {
 
     const partTypes = ['Upper-Recievers', 'Lower-Recievers', 'Barrels', 'Triggers', 'Stocks', 'Charging-Handles', 'Optics', 'Bolt-Carrier-Groups', 'Pitol-Grips'];
     const partSubTypes = {
-        Upper-Recievers: ['Aero Precision', 'Grey Ghost Precision', 'Radical Firearms', 'Willow Defense', 'Daniel Defense', 'Foxtrot Mike'],
-        Lower-Recievers: ['Aero Precision', ]
-    }
+        'Upper-Recievers': ['Aero Precision', 'Grey Ghost Precision', 'Radical Firearms', 'Willow Defense', 'Daniel Defense', 'Foxtrot Mike'],
+        'Lower-Recievers': ['Aero Precision', 'Grey Ghost Precision', 'Radical Firearms', 'Willow Defense', 'Daniel Defense', 'Foxtrot Mike']
+    };
+
+    return (
+        <div>
+            Hello parts!
+        </div>
+    )
 }
+
+export default PewPart;

@@ -1,8 +1,10 @@
 import { useState } from 'react'
 import './App.css'
+import PewPart from '.'
 
 function App() {
-  const [count, setCount] = useState(0)
+
+  const handleChangePart = ()
 
   return (
     <div className="App">
@@ -12,13 +14,10 @@ function App() {
 
       <h1>Build a Pew</h1>
 
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
+
+      
       </div>
       
-    </div>
   )
 }
 
