@@ -5,24 +5,31 @@ const PewPartSelector = ({ onPartSelected }) => {
     const [selectedSubPart, setSelectedSubPart] = useState('');
     const [submitSelection, setSubmitSelection] = useState(false);
     // Add a new state variable to handle each part, as it is selected
+    const [selectedParts, setSelectedParts] = useState([]);
 
     // Event handler to handle when a part changes
     const handlePartChange = (event) => {
         setSelectedPart(event.target.value);
         setSelectedSubPart('');
-    }
+    };
 
     // Event handler for sub types
     const handleSubPartChange = (event) => {
         setSelectedSubPart(event.target.value);
         onPartSelected(selectedPart, event.target.value); // Notifying the parent component of the state change
-    }
+    };
 
     // Need event handler for submission when making a selection
     const handleSubmitSelection = () => {
         setSubmitSelection(true);
         onPartSelected(selectedPart, selectedSubPart);
-    }
+        setSelectedParts([
+            ...selectedParts,
+            { part: selectedPart, subPart: selectedSubPart },
+        ]);
+        setSelectedPart('');
+        setSelectedSubPart('');
+    };
 
     // const partTypes = ['Upper-Recievers', 'Lower-Recievers', 'Barrels', 'Triggers', 'Stocks', 'Charging-Handles', 'Optics', 'Bolt-Carrier-Groups', 'Pitol-Grips'];
     const parts = {
@@ -37,7 +44,7 @@ const PewPartSelector = ({ onPartSelected }) => {
         'Pistol Grip': ['BCM', 'Tyrant', 'Magpul', 'Tactical Deluxe', 'Stark One']
     };
 
-    const labelStyle = {
+    const lableStyle = {
         color: '#ffffff',
         fontSize: '24px',
     };
@@ -53,51 +60,50 @@ const PewPartSelector = ({ onPartSelected }) => {
         <div className='body'>
             <h1>Build a Pew</h1>
             <div>
-                {/* This section starts with an inline ternary operator to handle whether a selection has been made*/}
-                {submitSelection ? (
-                    <div>
-                        <strong style={labelStyle}>
-                            Selected part: {selectedSubPart} {selectedPart} added to build
+                {/* Render the parts to the page */}
+                {selectedParts.map(({ part, subPart }, index) => (
+                    <div key={`${part}-${subPart}-${index}`}>
+                        <strong style={lableStyle}>
+                            Selected part: {subPart} {part} added to build
                         </strong>
                     </div>
-                ) : (
-                    <>
-                        <label style={labelStyle} htmlFor='part'>Part: </label>
-                        <select
-                            style={selectStyle}
-                            id='part'
-                            value={selectedPart}
-                            onChange={handlePartChange}
-                        >
+                ))}
 
-                            <option value=''>Select A Part</option>
-                            {Object.keys(parts).map((part) => (
-                                <option key={part} value={part}>
-                                    {part}
+                {/* Render the part and subPart */}
+                <label style={lableStyle} htmlFor='part'>Part: </label>
+                <select
+                    style={selectStyle}
+                    id='part'
+                    value={selectedPart}
+                    onChange={handlePartChange}
+                >
+
+                    <option value=''>Select A Part</option>
+                    {Object.keys(parts).map((part) => (
+                        <option key={part} value={part}>
+                            {part}
+                        </option>
+                    ))}
+                </select>
+
+                {selectedPart && (
+                    <>
+                        <label style={lableStyle} htmlFor='subPart'> Brand: </label>
+                        <select style={selectStyle} id='subPart' value={selectedSubPart} onChange={handleSubPartChange}>
+                            <option value=''>Select a brand</option>
+                            {parts[selectedPart].map((subPart) => (
+                                <option key={subPart} value={subPart}>
+                                    {subPart}
                                 </option>
                             ))}
                         </select>
-
-                        {selectedPart && (
-                            <>
-                                <label style={labelStyle} htmlFor='subPart'> Brand: </label>
-                                <select style={selectStyle} id='subPart' value={selectedSubPart} onChange={handleSubPartChange}>
-                                    <option value=''>Select a brand</option>
-                                    {parts[selectedPart].map((subPart) => (
-                                        <option key={subPart} value={subPart}>
-                                            {subPart}
-                                        </option>
-                                    ))}
-                                </select>
-                            </>
-                        )}
-                        {selectedSubPart && (
-                            <button onClick={handleSubmitSelection}>Submit</button>
-                        )}
                     </>
                 )}
+                {selectedSubPart && (
+                    <button onClick={handleSubmitSelection}>Submit</button>
+                )}
             </div>
-        </div>
+        </div >
     );
 };
 
