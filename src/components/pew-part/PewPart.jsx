@@ -63,7 +63,12 @@ const PewPartSelector = ({ onPartSelected }) => {
                 ) : (
                     <>
                         <label style={labelStyle} htmlFor='part'>Part: </label>
-                        <select style={selectStyle} id='part' value={selectedPart} onChange={handlePartChange}>
+                        <select
+                            style={selectStyle}
+                            id='part'
+                            value={selectedPart}
+                            onChange={handlePartChange}
+                        >
 
                             <option value=''>Select A Part</option>
                             {Object.keys(parts).map((part) => (
@@ -75,9 +80,9 @@ const PewPartSelector = ({ onPartSelected }) => {
 
                         {selectedPart && (
                             <>
-                                <label style={labelStyle} htmlFor='subPart'> Sub-Part: </label>
+                                <label style={labelStyle} htmlFor='subPart'> Brand: </label>
                                 <select style={selectStyle} id='subPart' value={selectedSubPart} onChange={handleSubPartChange}>
-                                    <option value=''>Select a sub-part</option>
+                                    <option value=''>Select a brand</option>
                                     {parts[selectedPart].map((subPart) => (
                                         <option key={subPart} value={subPart}>
                                             {subPart}
