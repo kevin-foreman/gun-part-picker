@@ -5,11 +5,11 @@ const Header = () => {
     const headerStyle = {
         width: '100%',
         textAlign: 'center',
-        margin: 0
+        marginTop: 0,
     };
 
     const imgStyle = {
-        width: '85%',
+        width: '95%',
     };
     return (
         <div>
