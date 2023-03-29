@@ -26,15 +26,15 @@ const PewPartSelector = ({ onPartSelected }) => {
 
     // const partTypes = ['Upper-Recievers', 'Lower-Recievers', 'Barrels', 'Triggers', 'Stocks', 'Charging-Handles', 'Optics', 'Bolt-Carrier-Groups', 'Pitol-Grips'];
     const parts = {
-        'Upper-Recievers': ['Aero Precision', 'Grey Ghost Precision', 'Radical Firearms', 'Willow Defense', 'Daniel Defense', 'Foxtrot Mike'],
-        'Lower-Recievers': ['Aero Precision', 'Grey Ghost Precision', 'Radical Firearms', 'Willow Defense', 'Daniel Defense', 'Foxtrot Mike'],
-        'Barrels': ['Ballistic Advantage', 'Faxon Firearms', 'WMD Guns', 'Wylde'],
-        'Triggers': ['Timney', 'CMC', 'Geissele', 'Hiperfire', 'Wilson Combat'],
-        'Stocks': ['BCM', 'Magpul', 'Battle Arms', 'Mission First', 'MOE'],
-        'Charging-Handles': ['Radian', 'Aero Precision', 'BCM'],
-        'Optics': ['Vortex', 'Sig Sauer', 'Swampfox', 'Trijicon'],
-        'Bolt-Carrier-Groups': ['Sons of Liberty', 'Aero Precision', 'Alpha Shooting', 'Jacob Grey', 'TRYBE'],
-        'Pistol-Grips': ['BCM', 'Tyrant', 'Magpul', 'Tactical Deluxe', 'Stark One']
+        'Upper-Reciever': ['Aero Precision', 'Grey Ghost Precision', 'Radical Firearms', 'Willow Defense', 'Daniel Defense', 'Foxtrot Mike'],
+        'Lower-Reciever': ['Aero Precision', 'Grey Ghost Precision', 'Radical Firearms', 'Willow Defense', 'Daniel Defense', 'Foxtrot Mike'],
+        'Barrel': ['Ballistic Advantage', 'Faxon Firearms', 'WMD Guns', 'Wylde'],
+        'Trigger': ['Timney', 'CMC', 'Geissele', 'Hiperfire', 'Wilson Combat'],
+        'Stock': ['BCM', 'Magpul', 'Battle Arms', 'Mission First', 'MOE'],
+        'Charging-Handle': ['Radian', 'Aero Precision', 'BCM'],
+        'Optic': ['Vortex', 'Sig Sauer', 'Swampfox', 'Trijicon'],
+        'Bolt-Carrier-Group': ['Sons of Liberty', 'Aero Precision', 'Alpha Shooting', 'Jacob Grey', 'TRYBE'],
+        'Pistol-Grip': ['BCM', 'Tyrant', 'Magpul', 'Tactical Deluxe', 'Stark One']
     };
 
     return (
@@ -45,7 +45,7 @@ const PewPartSelector = ({ onPartSelected }) => {
                 {submitSelection ? (
                     <div>
                         <strong>
-                            Selected Part: {selectedPart}, Sub-Part: {selectedSubPart}
+                            Selected part: {selectedSubPart} {selectedPart} added to build
                         </strong>
                     </div>
                 ) : (
