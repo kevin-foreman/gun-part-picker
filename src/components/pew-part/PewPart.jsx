@@ -41,6 +41,7 @@ const PewPartSelector = ({ onPartSelected }) => {
         <div className='body'>
             <h1>Build a Pew</h1>
             <div>
+                {/* This section starts with an inline ternary operator to handle whether a selection has been made*/}
                 {submitSelection ? (
                     <div>
                         <strong>

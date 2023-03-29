@@ -16,6 +16,8 @@ function App() {
 
       </div>
 
+      {/* <Header /> */}
+
       <PewPartSelector onPartSelected={handlePartSelected} />
       
       </div>
