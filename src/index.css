@@ -29,7 +29,10 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
-  background: url('src/assets/pew-2.jpg');
+  background: url("src/assets/pew-2.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 h1 {
