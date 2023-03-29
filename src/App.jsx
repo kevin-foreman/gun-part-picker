@@ -1,6 +1,7 @@
-import { useState } from 'react'
-import './App.css'
-import PewPartSelector from '/src/components/pew-part/PewPart'
+import { useState } from 'react';
+import './App.css';
+import PewPartSelector from '/src/components/pew-part/PewPart';
+import Header from '/src/components/header/Header.jsx'
 
 function App() {
 
@@ -16,7 +17,7 @@ function App() {
 
       </div>
 
-      {/* <Header /> */}
+      <Header />
 
       <PewPartSelector onPartSelected={handlePartSelected} />
       
