@@ -39,7 +39,11 @@ body {
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
-  color: rgb(151, 144, 144);
+  color: rgb(242, 242, 247);
+}
+
+#part {
+  color: black;
 }
 
 button {

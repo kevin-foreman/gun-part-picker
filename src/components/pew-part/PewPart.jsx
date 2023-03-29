@@ -37,6 +37,18 @@ const PewPartSelector = ({ onPartSelected }) => {
         'Pistol Grip': ['BCM', 'Tyrant', 'Magpul', 'Tactical Deluxe', 'Stark One']
     };
 
+    const labelStyle = {
+        color: '#ffffff',
+        fontSize: '24px',
+    };
+
+    const selectStyle = {
+        width: '250px',
+        height: '40px',
+        fontSize: '18px',
+        borderRadius: '10px',
+    };
+
     return (
         <div className='body'>
             <h1>Build a Pew</h1>
@@ -44,14 +56,14 @@ const PewPartSelector = ({ onPartSelected }) => {
                 {/* This section starts with an inline ternary operator to handle whether a selection has been made*/}
                 {submitSelection ? (
                     <div>
-                        <strong>
+                        <strong style={labelStyle}>
                             Selected part: {selectedSubPart} {selectedPart} added to build
                         </strong>
                     </div>
                 ) : (
                     <>
-                        <label htmlFor='part'>Part: </label>
-                        <select id='part' value={selectedPart} onChange={handlePartChange}>
+                        <label style={labelStyle} htmlFor='part'>Part: </label>
+                        <select style={selectStyle} id='part' value={selectedPart} onChange={handlePartChange}>
 
                             <option value=''>Select A Part</option>
                             {Object.keys(parts).map((part) => (
@@ -63,8 +75,8 @@ const PewPartSelector = ({ onPartSelected }) => {
 
                         {selectedPart && (
                             <>
-                                <label htmlFor='subPart'> Sub-Part: </label>
-                                <select id='subPart' value={selectedSubPart} onChange={handleSubPartChange}>
+                                <label style={labelStyle} htmlFor='subPart'> Sub-Part: </label>
+                                <select style={selectStyle} id='subPart' value={selectedSubPart} onChange={handleSubPartChange}>
                                     <option value=''>Select a sub-part</option>
                                     {parts[selectedPart].map((subPart) => (
                                         <option key={subPart} value={subPart}>
