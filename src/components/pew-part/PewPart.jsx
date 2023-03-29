@@ -31,7 +31,8 @@ const PewPartSelector = ({ onPartSelected }) => {
         setSelectedSubPart('');
     };
 
-    // const partTypes = ['Upper-Recievers', 'Lower-Recievers', 'Barrels', 'Triggers', 'Stocks', 'Charging-Handles', 'Optics', 'Bolt-Carrier-Groups', 'Pitol-Grips'];
+    {/* This is a hard-coded parts array, could be changed later to use dynamic content rendered from custom database
+        which would offer different part selections based on the platform selected, another future dev improvement */}
     const parts = {
         'Upper Reciever': ['Aero Precision', 'Grey Ghost Precision', 'Radical Firearms', 'Willow Defense', 'Daniel Defense', 'Foxtrot Mike'],
         'Lower Reciever': ['Aero Precision', 'Grey Ghost Precision', 'Radical Firearms', 'Willow Defense', 'Daniel Defense', 'Foxtrot Mike'],
@@ -46,7 +47,7 @@ const PewPartSelector = ({ onPartSelected }) => {
 
     const lableStyle = {
         color: '#ffffff',
-        fontSize: '24px',
+        fontSize: '90%',
     };
 
     const selectStyle = {
