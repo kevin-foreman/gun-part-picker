@@ -9,9 +9,13 @@ const PewPartSelector = ({ onPartSelected }) => {
     // Add a state variable to handle each submitted part in the overall build
     const [submittedParts, setSubmittedParts] = useState([]);
 
+    // Add useEffect to have instant access to the submitted parts
     useEffect(() => {
         console.log(submittedParts);
     }, [submittedParts]);
+
+    // Add a state variable to handle conditional rendering of the submit build button
+    const [showSubmitButton, setShowSubmitButton] = useState(false);
 
     // Event handler to handle when a part changes
     const handlePartChange = (event) => {
@@ -39,6 +43,15 @@ const PewPartSelector = ({ onPartSelected }) => {
             ...submittedParts,
             [selectedSubPart, selectedPart]
         ]);
+        const newSubmittedBuild = [
+            ...submittedParts,
+            [selectedSubPart, selectedPart],
+        ];
+        setSubmittedParts(newSubmittedBuild);
+
+        if (newSubmittedBuild.length >= 9) {
+            setShowSubmitButton(true);
+        }
         // console.log(submittedParts);
         setSelectedPart('');
         setSelectedSubPart('');
@@ -78,6 +91,7 @@ const PewPartSelector = ({ onPartSelected }) => {
         <div className='body'>
             <h1>Build a Pew</h1>
             <div>
+
                 {/* Render the parts to the page */}
                 {selectedParts.map(({ part, subPart }, index) => (
                     <div key={`${part}-${subPart}-${index}`}>
@@ -85,7 +99,7 @@ const PewPartSelector = ({ onPartSelected }) => {
                             Selected part: {subPart} {part} added to build
                         </strong>
                     </div>
-                ))}
+                ))};
 
                 {/* Render the part and subPart */}
                 <label style={lableStyle} htmlFor='part'>Part: </label>
@@ -116,10 +130,18 @@ const PewPartSelector = ({ onPartSelected }) => {
                             ))}
                         </select>
                     </>
-                )}
+                )};
+
                 {selectedSubPart && (
                     <button onClick={handleSubmitSelection}>Submit</button>
                 )}
+            </div>
+            <div>
+                {showSubmitButton ? (
+                    <button onClick={() => sendSubmittedBuild(submittedBuild)}>
+                        Submit Entire Build
+                    </button>
+                ) : null}
             </div>
         </div >
     );
