@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const PewPartSelector = ({ onPartSelected }) => {
     const [selectedPart, setSelectedPart] = useState('');
@@ -8,6 +8,10 @@ const PewPartSelector = ({ onPartSelected }) => {
     const [selectedParts, setSelectedParts] = useState([]);
     // Add a state variable to handle each submitted part in the overall build
     const [submittedParts, setSubmittedParts] = useState([]);
+
+    useEffect(() => {
+        console.log(submittedParts);
+    }, [submittedParts]);
 
     // Event handler to handle when a part changes
     const handlePartChange = (event) => {
@@ -29,11 +33,13 @@ const PewPartSelector = ({ onPartSelected }) => {
             ...selectedParts,
             { part: selectedPart, subPart: selectedSubPart },
         ]);
+        // Tried using only useState to handle this bit of code, but due to its asynchronous nature,
+        // it would not work for what I wanted to do, addint useEffect as well
         setSubmittedParts([
             ...submittedParts,
             [selectedSubPart, selectedPart]
         ]);
-        console.log(submittedParts);
+        // console.log(submittedParts);
         setSelectedPart('');
         setSelectedSubPart('');
     };
