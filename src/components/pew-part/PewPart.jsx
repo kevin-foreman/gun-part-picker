@@ -95,6 +95,8 @@ const PewPartSelector = ({ onPartSelected }) => {
                 {/* Render the parts to the page */}
                 {selectedParts.map(({ part, subPart }, index) => (
                     <div key={`${part}-${subPart}-${index}`}>
+                        
+                        {/* inline style passed in from the objects above */}
                         <strong style={lableStyle}>
                             Selected part: {subPart} {part} added to build
                         </strong>
