@@ -5,9 +5,10 @@ import Header from '/src/components/header/Header.jsx'
 
 function App() {
 
-  const handlePartSelected = (part, subPart) => {
+  const handlePartSelected = (part, subPart, selectedParts) => {
     console.log('Selected part:', part);
     console.log('Selected sub-part:', subPart);
+    // console.log({...selectedParts});
     // Store the selected part and sub-part, or make an API call here
   }
 

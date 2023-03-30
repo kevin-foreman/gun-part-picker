@@ -6,6 +6,8 @@ const PewPartSelector = ({ onPartSelected }) => {
     const [submitSelection, setSubmitSelection] = useState(false);
     // Add a new state variable to handle each part, as it is selected
     const [selectedParts, setSelectedParts] = useState([]);
+    // Add a state variable to handle each submitted part in the overall build
+    const [submittedParts, setSubmittedParts] = useState([]);
 
     // Event handler to handle when a part changes
     const handlePartChange = (event) => {
@@ -27,6 +29,11 @@ const PewPartSelector = ({ onPartSelected }) => {
             ...selectedParts,
             { part: selectedPart, subPart: selectedSubPart },
         ]);
+        setSubmittedParts([
+            ...submittedParts,
+            [selectedSubPart, selectedPart]
+        ]);
+        console.log(submittedParts);
         setSelectedPart('');
         setSelectedSubPart('');
     };
@@ -43,7 +50,8 @@ const PewPartSelector = ({ onPartSelected }) => {
         'Optic': ['Vortex', 'Sig Sauer', 'Swampfox', 'Trijicon'],
         'Bolt Carrier Group': ['Sons of Liberty', 'Aero Precision', 'Alpha Shooting', 'Jacob Grey', 'TRYBE'],
         'Pistol Grip': ['BCM', 'Tyrant', 'Magpul', 'Tactical Deluxe', 'Stark One'],
-        // 'Buffer Spring': ['X', 'XX', 'XXX']
+        // 'Buffer Spring': ['X', 'XX', 'XXX'],
+        // 'BUIS': ['X', 'XX', 'XXX'],
     };
 
     const lableStyle = {
