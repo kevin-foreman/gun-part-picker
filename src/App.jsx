@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect } from 'react';
 import './App.css';
 import PewPartSelector from '/src/components/pew-part/PewPart';
 import Header from '/src/components/header/Header.jsx'

@@ -42,7 +42,8 @@ const PewPartSelector = ({ onPartSelected }) => {
         'Charging-Handle': ['Radian', 'Aero Precision', 'BCM'],
         'Optic': ['Vortex', 'Sig Sauer', 'Swampfox', 'Trijicon'],
         'Bolt Carrier Group': ['Sons of Liberty', 'Aero Precision', 'Alpha Shooting', 'Jacob Grey', 'TRYBE'],
-        'Pistol Grip': ['BCM', 'Tyrant', 'Magpul', 'Tactical Deluxe', 'Stark One']
+        'Pistol Grip': ['BCM', 'Tyrant', 'Magpul', 'Tactical Deluxe', 'Stark One'],
+        // 'Buffer Spring': ['X', 'XX', 'XXX']
     };
 
     const lableStyle = {
