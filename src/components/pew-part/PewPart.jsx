@@ -60,9 +60,11 @@ const PewPartSelector = ({ onPartSelected }) => {
         // 'BUIS': ['X', 'XX', 'XXX'],
     };
 
+    // JSX version of inline styling, create these objects and pass them into your html tag elements with curly braces
     const lableStyle = {
         color: '#ffffff',
-        fontSize: '90%',
+        fontSize: '99%',
+        margin: '20px',
     };
 
     const selectStyle = {

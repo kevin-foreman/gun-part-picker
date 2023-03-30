@@ -8,7 +8,7 @@ function App() {
   const handlePartSelected = (part, subPart, submittedParts) => {
     console.log('Selected part:', part);
     console.log('Selected sub-part:', subPart);
-    console.log(submittedParts);
+    // console.log(submittedParts);
     // Store the selected part and sub-part, or make an API call here
   }
 
