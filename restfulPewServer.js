@@ -5,7 +5,7 @@ import cors from 'cors';
 import express, { json } from 'express';
 const app = express();
 import next from 'process';
-const port = process.env.port || 8001;
+const port = process.env.port || 8000;
 import { getPool } from './dbConn.js';
 // import pkg from 'jquery';
 // const { data } = pkg;
@@ -24,6 +24,15 @@ app.use((req, res, next) => {
 app.use(json());
 
 // app.get(all)
+app.get('/api/pews', (req, res) => {
+    pool.query('SELECT * FROM pews', (err, result) => {
+        if (err) {
+            return(err);
+        }
+        const rows = result.rows;
+        res.send(rows);
+    });
+});
 
 // app.get(one, by ID)
 

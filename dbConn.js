@@ -5,7 +5,7 @@ const { Pool } = pkg;
 // Environmental variables for DB connection or use default if not defined
 // Local environment may not have them, but Render will when deployed
 const POSTGRES_HOST = process.env.POSTGRES_HOST || '127.0.0.1';
-const POSTGRES_DB = process.env.POSTGRES_DB || 'drinkFinder_render';
+const POSTGRES_DB = process.env.POSTGRES_DB || 'pewBuild';
 const POSTGRES_PASSWORD = process.env.POSTGRES_PASSWORD || 'password';
 const POSTGRES_USER = process.env.POSTGRES_USER || 'postgres';
 const DATABASE_URL = process.env.DATABASE_URL;
