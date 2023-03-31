@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import dotenv from 'dotenv';
+dotenv.config();
+const apiUrl = process.env.REACT_APP_API_URL;
 
 const PewPartSelector = ({ onPartSelected }) => {
     const [selectedPart, setSelectedPart] = useState('');
@@ -11,7 +14,15 @@ const PewPartSelector = ({ onPartSelected }) => {
 
     // Add useEffect to have instant access to the submitted parts
     useEffect(() => {
-        console.log(submittedParts);
+        fetch(apiUrl + '/api/pews')
+        .then(response => {
+            const isJson = response.headers.get('content-type')?.includes('application/');
+            return isJson && response.json();
+        })
+        .then(data => {
+            console.log('data:', data);
+            console.log(submittedParts);
+        })
     }, [submittedParts]);
 
     // Add a state variable to handle conditional rendering of the submit build button
