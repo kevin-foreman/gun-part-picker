@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import dotenv from 'dotenv';
-dotenv.config();
-const apiUrl = process.env.REACT_APP_API_URL;
+// import dotenv from 'dotenv';
+// dotenv.config();
+// import path from 'path';
+// const apiUrl = process.env.REACT_APP_API_URL;
+
+
 
 const PewPartSelector = ({ onPartSelected }) => {
     const [selectedPart, setSelectedPart] = useState('');
@@ -12,21 +15,25 @@ const PewPartSelector = ({ onPartSelected }) => {
     // Add a state variable to handle each submitted part in the overall build
     const [submittedParts, setSubmittedParts] = useState([]);
 
-    // Add useEffect to have instant access to the submitted parts
-    useEffect(() => {
-        fetch(apiUrl + '/api/pews')
-        .then(response => {
-            const isJson = response.headers.get('content-type')?.includes('application/');
-            return isJson && response.json();
-        })
-        .then(data => {
-            console.log('data:', data);
-            console.log(submittedParts);
-        })
-    }, [submittedParts]);
-
     // Add a state variable to handle conditional rendering of the submit build button
     const [showSubmitButton, setShowSubmitButton] = useState(false);
+
+    // Add useEffect to have instant access to the submitted parts
+    useEffect(() => {
+        fetch('https://127.0.0.1/api/pews')
+            .then((response) => {
+                const isJson = response.headers.get('content-type')?.includes('application/');
+                return isJson && response.json();
+            })
+            .then((data) => {
+                // console.log('data:', data);
+                // console.log(submittedParts);
+                // setSubmittedParts(data);
+            })
+            .catch((error) => {
+                console.error('There was an error', error);
+            });
+    }, [submittedParts]);
 
     // Event handler to handle when a part changes
     const handlePartChange = (event) => {
@@ -49,7 +56,7 @@ const PewPartSelector = ({ onPartSelected }) => {
             { part: selectedPart, subPart: selectedSubPart },
         ]);
         // Tried using only useState to handle this bit of code, but due to its asynchronous nature,
-        // it would not work for what I wanted to do, addint useEffect as well
+        // it would not work for what I wanted to do, I had to add in useEffect as well
         setSubmittedParts([
             ...submittedParts,
             [selectedSubPart, selectedPart]
@@ -62,6 +69,7 @@ const PewPartSelector = ({ onPartSelected }) => {
 
         if (newSubmittedBuild.length >= 9) {
             setShowSubmitButton(true);
+            setSubmitSelection(false);
         }
         // console.log(submittedParts);
         setSelectedPart('');
@@ -106,7 +114,7 @@ const PewPartSelector = ({ onPartSelected }) => {
                 {/* Render the parts to the page */}
                 {selectedParts.map(({ part, subPart }, index) => (
                     <div key={`${part}-${subPart}-${index}`}>
-                        
+
                         {/* inline style passed in from the objects above */}
                         <strong style={lableStyle}>
                             Selected part: {subPart} {part} added to build
