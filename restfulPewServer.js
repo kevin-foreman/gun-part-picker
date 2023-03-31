@@ -5,10 +5,10 @@ import cors from 'cors';
 import express, { json } from 'express';
 const app = express();
 import next from 'process';
-const port = process.env.port || 8000;
+const port = process.env.port || 8001;
 import { getPool } from './dbConn.js';
-import pkg from 'jquery';
-const { data } = pkg;
+// import pkg from 'jquery';
+// const { data } = pkg;
 const pool = getPool();
 
 app.use((req, res, next) => {
