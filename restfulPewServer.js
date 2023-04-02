@@ -11,15 +11,23 @@ import { getPool } from './dbConn.js';
 // const { data } = pkg;
 const pool = getPool();
 
-app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE, OPTIONS'); // include OPTIONS method
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-    if (req.method === 'OPTIONS') {
-        return res.sendStatus(200); // respond OK to OPTIONS requests
-    }
-    next();
-});
+// Configure CORS middleware
+const corsOptions = {
+    origin: ['http://localhost:8001', 'http://127.0.0.1:8001', 'http://localhost:5173'],
+    optionsSuccessStatus: 200,
+};
+
+app.use(cors(corsOptions));
+
+// app.use((req, res, next) => {
+//     res.setHeader('Access-Control-Allow-Origin', '*');
+//     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE, OPTIONS'); // include OPTIONS method
+//     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+//     if (req.method === 'OPTIONS') {
+//         return res.sendStatus(200); // respond OK to OPTIONS requests
+//     }
+//     next();
+// });
 
 app.use(json());
 
@@ -46,7 +54,7 @@ app.post('/api/pews/', (req, res) => {
 
         pool.query('INSERT INTO pews (upper_reciever, lower_reciever, barrel, trigger, stock, charging_handle, optic, bolt_carrier_group, pistol_grip) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *;', [upper_reciever, lower_reciever, barrel, trigger, stock, charging_handle, optic, bolt_carrier_group, pistol_grip], (err, result) => {
             if (err) {
-                return(err);
+                return (err);
             };
             let pewInfo = result.rows[0];
             console.log('Added: ' + pewInfo);
@@ -59,7 +67,7 @@ app.post('/api/pews/', (req, res) => {
 
 app.use(cors({ origin: '*' }));
 
-app.listen(port, () => {
+app.listen(port, '0.0.0.0', () => {
     console.log(`Listening on port ${port}`);
     // console.log('Connecting to postgres pool: ', pool);
 });

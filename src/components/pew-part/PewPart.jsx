@@ -23,15 +23,15 @@ const PewPartSelector = ({ onPartSelected }) => {
 
     // Add useEffect to have instant access to previously submitted builds currently in the DB
     useEffect(() => {
-        fetch('localhost:8001/api/pews')
+        fetch('http://127.0.0.1:8001/api/pews')
             .then((response) => {
-                method: 'GET';
                 const isJson = response.headers.get('content-type')?.includes('application/');
+                // console.log(data);
+                console.log(response.json());
                 return isJson && response.json();
             })
             .then((data) => {
                 // console.log('data:', data);
-                // console.log(submittedParts);
                 // setSubmittedParts(data);
             })
             .catch((error) => {
