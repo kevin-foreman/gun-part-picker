@@ -27,12 +27,13 @@ const PewPartSelector = ({ onPartSelected }) => {
             .then((response) => {
                 const isJson = response.headers.get('content-type')?.includes('application/');
                 // console.log(data);
-                console.log(response.json());
+                // console.log(isJson && response.json());
                 return isJson && response.json();
             })
             .then((data) => {
                 // console.log('data:', data);
                 // setSubmittedParts(data);
+                // testPostRequest();
             })
             .catch((error) => {
                 console.error('There was an error', error);
@@ -41,17 +42,26 @@ const PewPartSelector = ({ onPartSelected }) => {
 
     // Function to handle submitted builds, and send them to the DB
     const sendSubmittedBuild = (submittedBuild) => {
-        // Send the submittedBuild data to your API
-        fetch('https://127.0.0.1:8001/api/pews', {
+        setBuildSubmitted(true);
+        const submittedBuildObj = submittedBuild.reduce((acc, [part, partType]) => {
+            acc[partType.replace(' ', '_').replace(' ', '_').toLowerCase()] = part;
+            return acc;
+        }, {});
+        // Send the submittedBuild data to the API
+        fetch('http://127.0.0.1:8001/api/pews', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(submittedBuild),
+            body: JSON.stringify(submittedBuildObj),
         })
-            .then((response) => response.json())
-            .then((data) => {
-                console.log('Build submitted successfully:', data);
+
+            .then((response) => {
+                console.log('Request sent:', response);
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error: ${response.status}`);
+                }
 
                 // Clear the submitted parts on the screen and reset the state variables
                 setSelectedParts([]);
@@ -113,7 +123,7 @@ const PewPartSelector = ({ onPartSelected }) => {
         'Barrel': ['Ballistic Advantage', 'Faxon Firearms', 'WMD Guns', 'Wylde'],
         'Trigger': ['Timney', 'CMC', 'Geissele', 'Hiperfire', 'Wilson Combat'],
         'Stock': ['BCM', 'Magpul', 'Battle Arms', 'Mission First', 'MOE'],
-        'Charging-Handle': ['Radian', 'Aero Precision', 'BCM'],
+        'Charging Handle': ['Radian', 'Aero Precision', 'BCM'],
         'Optic': ['Vortex', 'Sig Sauer', 'Swampfox', 'Trijicon'],
         'Bolt Carrier Group': ['Sons of Liberty', 'Aero Precision', 'Alpha Shooting', 'Jacob Grey', 'TRYBE'],
         'Pistol Grip': ['BCM', 'Tyrant', 'Magpul', 'Tactical Deluxe', 'Stark One'],
@@ -151,10 +161,12 @@ const PewPartSelector = ({ onPartSelected }) => {
                     </div>
                 ))};
 
-                {!buildSubmitted && (
+                {!buildSubmitted && submittedParts.length < 9 ? (
                     <>
                         {/* Render the part and subPart */}
-                        <label style={lableStyle} htmlFor='part'>Part: </label>
+                        <label style={lableStyle} htmlFor='part'>
+                            Part:{' '}
+                        </label>
                         <select
                             style={selectStyle}
                             id='part'
@@ -183,12 +195,12 @@ const PewPartSelector = ({ onPartSelected }) => {
                                 </select>
                             </>
                         )}
+                        {selectedSubPart && (
+                            <button onClick={handleSubmitSelection}>Submit</button>
+                        )}
                     </>
-                )}
+                ) : null}
 
-                {selectedSubPart && (
-                    <button onClick={handleSubmitSelection}>Submit</button>
-                )}
             </div>
             <div>
                 {showSubmitButton ? (
