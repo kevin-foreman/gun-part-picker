@@ -15,13 +15,17 @@ const PewPartSelector = ({ onPartSelected }) => {
     // Add a state variable to handle each submitted part in the overall build
     const [submittedParts, setSubmittedParts] = useState([]);
 
-    // Add a state variable to handle conditional rendering of the submit build button
+    // Add state variables to handle conditional rendering of the submit build button
+    // as well as other things to do, once the build is submitted
     const [showSubmitButton, setShowSubmitButton] = useState(false);
+    const [buildSubmitted, setBuildSubmitted] = useState(false);
 
-    // Add useEffect to have instant access to the submitted parts
+
+    // Add useEffect to have instant access to previously submitted builds currently in the DB
     useEffect(() => {
-        fetch('https://127.0.0.1/api/pews')
+        fetch('localhost:8001/api/pews')
             .then((response) => {
+                method: 'GET';
                 const isJson = response.headers.get('content-type')?.includes('application/');
                 return isJson && response.json();
             })
@@ -34,6 +38,31 @@ const PewPartSelector = ({ onPartSelected }) => {
                 console.error('There was an error', error);
             });
     }, [submittedParts]);
+
+    // Function to handle submitted builds, and send them to the DB
+    const sendSubmittedBuild = (submittedBuild) => {
+        // Send the submittedBuild data to your API
+        fetch('https://127.0.0.1:8001/api/pews', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(submittedBuild),
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log('Build submitted successfully:', data);
+
+                // Clear the submitted parts on the screen and reset the state variables
+                setSelectedParts([]);
+                setSubmittedParts([]);
+                setShowSubmitButton(false);
+                setBuildSubmitted(false);
+            })
+            .catch((error) => {
+                console.error('There was an error submitting the build:', error);
+            });
+    };
 
     // Event handler to handle when a part changes
     const handlePartChange = (event) => {
@@ -122,36 +151,40 @@ const PewPartSelector = ({ onPartSelected }) => {
                     </div>
                 ))};
 
-                {/* Render the part and subPart */}
-                <label style={lableStyle} htmlFor='part'>Part: </label>
-                <select
-                    style={selectStyle}
-                    id='part'
-                    value={selectedPart}
-                    onChange={handlePartChange}
-                >
-
-                    <option value=''>Select A Part</option>
-                    {Object.keys(parts).map((part) => (
-                        <option key={part} value={part}>
-                            {part}
-                        </option>
-                    ))}
-                </select>
-
-                {selectedPart && (
+                {!buildSubmitted && (
                     <>
-                        <label style={lableStyle} htmlFor='subPart'> Brand: </label>
-                        <select style={selectStyle} id='subPart' value={selectedSubPart} onChange={handleSubPartChange}>
-                            <option value=''>Select a brand</option>
-                            {parts[selectedPart].map((subPart) => (
-                                <option key={subPart} value={subPart}>
-                                    {subPart}
+                        {/* Render the part and subPart */}
+                        <label style={lableStyle} htmlFor='part'>Part: </label>
+                        <select
+                            style={selectStyle}
+                            id='part'
+                            value={selectedPart}
+                            onChange={handlePartChange}
+                        >
+
+                            <option value=''>Select A Part</option>
+                            {Object.keys(parts).map((part) => (
+                                <option key={part} value={part}>
+                                    {part}
                                 </option>
                             ))}
                         </select>
+
+                        {selectedPart && (
+                            <>
+                                <label style={lableStyle} htmlFor='subPart'> Brand: </label>
+                                <select style={selectStyle} id='subPart' value={selectedSubPart} onChange={handleSubPartChange}>
+                                    <option value=''>Select a brand</option>
+                                    {parts[selectedPart].map((subPart) => (
+                                        <option key={subPart} value={subPart}>
+                                            {subPart}
+                                        </option>
+                                    ))}
+                                </select>
+                            </>
+                        )}
                     </>
-                )};
+                )}
 
                 {selectedSubPart && (
                     <button onClick={handleSubmitSelection}>Submit</button>
@@ -159,7 +192,7 @@ const PewPartSelector = ({ onPartSelected }) => {
             </div>
             <div>
                 {showSubmitButton ? (
-                    <button onClick={() => sendSubmittedBuild(submittedBuild)}>
+                    <button onClick={() => sendSubmittedBuild(submittedParts)}>
                         Submit Entire Build
                     </button>
                 ) : null}

@@ -18,7 +18,7 @@ app.use((req, res, next) => {
     if (req.method === 'OPTIONS') {
         return res.sendStatus(200); // respond OK to OPTIONS requests
     }
-    next(); 
+    next();
 });
 
 app.use(json());
@@ -27,7 +27,7 @@ app.use(json());
 app.get('/api/pews', (req, res) => {
     pool.query('SELECT * FROM pews', (err, result) => {
         if (err) {
-            return(err);
+            return (err);
         }
         const rows = result.rows;
         res.send(rows);
@@ -37,6 +37,23 @@ app.get('/api/pews', (req, res) => {
 // app.get(one, by ID)
 
 // app.post
+app.post('/api/pews/', (req, res) => {
+    const { name } = req.body;
+
+    if (!name) {
+        return res.status(400).send('Error: missing values')
+    } else {
+
+        pool.query('INSERT INTO pews (upper_reciever, lower_reciever, barrel, trigger, stock, charging_handle, optic, bolt_carrier_group, pistol_grip) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *;', [upper_reciever, lower_reciever, barrel, trigger, stock, charging_handle, optic, bolt_carrier_group, pistol_grip], (err, result) => {
+            if (err) {
+                return(err);
+            };
+            let pewInfo = result.rows[0];
+            console.log('Added: ' + pewInfo);
+            res.status(200).send(pewInfo);
+        });
+    };
+});
 
 // app.delete
 
