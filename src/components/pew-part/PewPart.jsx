@@ -4,8 +4,6 @@ import React, { useState, useEffect } from 'react';
 // import path from 'path';
 // const apiUrl = process.env.REACT_APP_API_URL;
 
-
-
 const PewPartSelector = ({ onPartSelected }) => {
     const [selectedPart, setSelectedPart] = useState('');
     const [selectedSubPart, setSelectedSubPart] = useState('');
@@ -26,17 +24,14 @@ const PewPartSelector = ({ onPartSelected }) => {
         fetch('http://127.0.0.1:8001/api/pews')
             .then((response) => {
                 const isJson = response.headers.get('content-type')?.includes('application/');
-                // console.log(data);
-                // console.log(isJson && response.json());
+                console.log(isJson && response.json());
                 return isJson && response.json();
             })
             .then((data) => {
-                // console.log('data:', data);
-                // setSubmittedParts(data);
-                // testPostRequest();
+                console.log('data:', data);
             })
             .catch((error) => {
-                console.error('There was an error', error);
+                // console.error('There was an error', error);
             });
     }, [submittedParts]);
 
