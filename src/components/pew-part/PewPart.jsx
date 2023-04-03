@@ -18,17 +18,24 @@ const PewPartSelector = ({ onPartSelected }) => {
     const [showSubmitButton, setShowSubmitButton] = useState(false);
     const [buildSubmitted, setBuildSubmitted] = useState(false);
 
+    // Add state variable to couple with the useEffect hook to render previous builds
+    const [builds, setBuilds] = useState([]);
+    // Add state to change how the previously stored builds are rendered
+    const [expandedBuildIndex, setExpandedBuildIndex] = useState(null);
+    const [isExpanded, setIsExpanded] = useState(false);
+
 
     // Add useEffect to have instant access to previously submitted builds currently in the DB
     useEffect(() => {
         fetch('http://127.0.0.1:8001/api/pews')
             .then((response) => {
                 const isJson = response.headers.get('content-type')?.includes('application/');
-                console.log(isJson && response.json());
+                // console.log(isJson && response.json());
                 return isJson && response.json();
             })
             .then((data) => {
                 console.log('data:', data);
+                setBuilds(data);
             })
             .catch((error) => {
                 // console.error('There was an error', error);
@@ -110,6 +117,17 @@ const PewPartSelector = ({ onPartSelected }) => {
         setSelectedSubPart('');
     };
 
+    const handleBuildClick = (index) => {
+        // Add logic to handle the build click event
+        // console.log('Clicked build:', build);
+        if (expandedBuildIndex === index) {
+            setIsExpanded(!isExpanded);
+        } else {
+            setExpandedBuildIndex(index);
+            setIsExpanded(true);
+        }
+    };
+
     {/* This is a hard-coded parts array, could be changed later to use dynamic content rendered from custom database
         which would offer different part selections based on the platform selected, another future dev improvement */}
     const parts = {
@@ -143,6 +161,31 @@ const PewPartSelector = ({ onPartSelected }) => {
     return (
         <div className='body'>
             <h1>Build a Pew</h1>
+
+            <div className='body' style={lableStyle}>
+                Previous Builds:
+                {builds.map((build, index) => (
+                    <div
+                        key={index}
+                        className="build"
+                        onClick={() => handleBuildClick(index)}
+                        >
+                        {/* Render the build data */}
+                        {isExpanded && expandedBuildIndex === index ? (
+                <>
+                    <div>Build #{index + 1}: </div>
+                    <div>Upper Receiver: {build.upper_reciever}</div>
+                    <div>Lower Receiver: {build.lower_reciever}</div>
+                    <div>Barrel: {build.barrel}</div>
+                    {/* Add other build components */}
+                </>
+            ) : (
+                <div>Build #{index}</div>
+            )}
+                    </div>
+                ))}
+            </div>
+
             <div>
 
                 {/* Render the parts to the page */}
