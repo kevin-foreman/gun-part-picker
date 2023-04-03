@@ -180,7 +180,7 @@ const PewPartSelector = ({ onPartSelected }) => {
                     {/* Add other build components */}
                 </>
             ) : (
-                <div>Build #{index}</div>
+                <div>Build #{index + 1}</div>
             )}
                     </div>
                 ))}
