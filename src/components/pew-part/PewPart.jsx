@@ -34,7 +34,7 @@ const PewPartSelector = ({ onPartSelected }) => {
                 return isJson && response.json();
             })
             .then((data) => {
-                console.log('data:', data);
+                // console.log('data:', data);
                 setBuilds(data);
             })
             .catch((error) => {
@@ -177,6 +177,12 @@ const PewPartSelector = ({ onPartSelected }) => {
                     <div>Upper Receiver: {build.upper_reciever}</div>
                     <div>Lower Receiver: {build.lower_reciever}</div>
                     <div>Barrel: {build.barrel}</div>
+                    <div>Trigger: {build.trigger}</div>
+                    <div>Stock: {build.stock}</div>
+                    <div>Charging Handle: {build.charging_handle}</div>
+                    <div>Optic: {build.optic}</div>
+                    <div>Bolt Carrier Group: {build.bolt_carrier_group}</div>
+                    <div>Pistol Grip: {build.pistol_grip}</div>
                     {/* Add other build components */}
                 </>
             ) : (
