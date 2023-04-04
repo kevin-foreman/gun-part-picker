@@ -172,7 +172,7 @@ const PewPartSelector = ({ onPartSelected }) => {
                         {/* Render the build data */}
                         {isExpanded && expandedBuildIndex === index ? (
                 <>
-                    <div>Build #{index + 1}: </div>
+                    <div>Build #{build.id}: </div>
                     <div>Upper Receiver: {build.upper_reciever}</div>
                     <div>Lower Receiver: {build.lower_reciever}</div>
                     <div>Barrel: {build.barrel}</div>
@@ -185,7 +185,7 @@ const PewPartSelector = ({ onPartSelected }) => {
                     {/* Add other build components */}
                 </>
             ) : (
-                <div>Build #{index + 1}</div>
+                <div>Build #{build.id}</div>
             )}
                     </div>
                 ))}
