@@ -30,7 +30,6 @@ const PewPartSelector = ({ onPartSelected }) => {
         fetch('http://127.0.0.1:8001/api/pews')
             .then((response) => {
                 const isJson = response.headers.get('content-type')?.includes('application/');
-                // console.log(isJson && response.json());
                 return isJson && response.json();
             })
             .then((data) => {
